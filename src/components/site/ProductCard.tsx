@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { MessageCircle, ArrowRight } from "lucide-react";
 import type { Product } from "@/lib/queries";
+import { defaultProductsSearch } from "@/lib/products-search";
 import { waProductLink } from "@/lib/whatsapp";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -33,6 +34,7 @@ export function ProductCard({ product }: { product: Product }) {
           <Link
             to="/products/$slug"
             params={{ slug: product.slug }}
+            search={defaultProductsSearch}
             className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-3 px-3 py-2.5 text-xs font-semibold transition-colors hover:border-gold hover:text-accent"
           >
             Details <ArrowRight className="h-3 w-3" />

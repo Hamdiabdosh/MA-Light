@@ -5,6 +5,7 @@ import { MessageCircle } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { roomsQuery, roomProductsQuery } from "@/lib/queries";
+import { defaultProductsSearch } from "@/lib/products-search";
 import { waProductLink } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/showroom")({
@@ -78,6 +79,7 @@ function ShowroomPage() {
                           <Link
                             to="/products/$slug"
                             params={{ slug: p.slug }}
+                            search={defaultProductsSearch}
                             className="flex-1 rounded-lg border border-border bg-surface-2 px-3 py-2 text-center text-xs font-semibold hover:border-gold"
                           >
                             Details

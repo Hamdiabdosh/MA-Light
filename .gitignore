@@ -3,6 +3,7 @@ dist/
 .vinxi/
 .output/
 .tanstack/tmp/
+.vercel/
 
 .env
 .env.*

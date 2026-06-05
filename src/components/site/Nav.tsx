@@ -1,15 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import { Zap, MessageCircle, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { defaultProductsSearch } from "@/lib/products-search";
 import { waLink } from "@/lib/whatsapp";
 
 const links = [
-  { to: "/products", label: "Products" },
-  { to: "/categories", label: "Categories" },
-  { to: "/showroom", label: "Showroom" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
+  { to: "/products" as const, label: "Products", search: defaultProductsSearch },
+  { to: "/categories" as const, label: "Categories" },
+  { to: "/showroom" as const, label: "Showroom" },
+  { to: "/gallery" as const, label: "Gallery" },
+  { to: "/about" as const, label: "About" },
+  { to: "/contact" as const, label: "Contact" },
 ];
 
 export function Nav() {
@@ -33,6 +34,7 @@ export function Nav() {
             <li key={l.to}>
               <Link
                 to={l.to}
+                {...("search" in l ? { search: l.search } : {})}
                 className="text-[13px] tracking-wide text-muted-foreground transition-colors hover:text-accent"
                 activeProps={{ className: "text-accent" }}
               >
@@ -66,6 +68,7 @@ export function Nav() {
               <li key={l.to}>
                 <Link
                   to={l.to}
+                  {...("search" in l ? { search: l.search } : {})}
                   onClick={() => setOpen(false)}
                   className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-surface-2 hover:text-foreground"
                 >

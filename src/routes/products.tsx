@@ -4,15 +4,15 @@ import { Search } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { ProductCard } from "@/components/site/ProductCard";
-import { categoriesQuery, productsQuery } from "@/lib/queries";
-
-type ProductsSearch = { category: string; q: string };
+import { categoriesQuery, productsQuery, type Product } from "@/lib/queries";
+import { defaultProductsSearch, type ProductsSearch } from "@/lib/products-search";
 
 export const Route = createFileRoute("/products")({
   validateSearch: (search: Record<string, unknown>): ProductsSearch => ({
     category: (search.category as string) ?? "",
     q: (search.q as string) ?? "",
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(categoriesQuery),
   head: () => ({ meta: [{ title: "All Products — Harar Electrical Solutions" }] }),
   component: ProductsPage,
 });
@@ -78,7 +78,7 @@ function ProductsPage() {
             </div>
           ) : products && products.length > 0 ? (
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {products.map((p: ProductsSearch) => (
+              {products.map((p: Product) => (
                 <ProductCard key={p.id} product={p} />
               ))}
             </div>
@@ -87,7 +87,7 @@ function ProductsPage() {
               <div className="text-5xl">🔍</div>
               <div className="mt-4 font-display text-2xl">No products found</div>
               <p className="mt-2 text-sm text-muted-foreground">Try a different search or category.</p>
-              <Link to="/products" search={{ category: "", q: "" }} className="mt-6 inline-block text-sm text-accent">
+              <Link to="/products" search={defaultProductsSearch} className="mt-6 inline-block text-sm text-accent">
                 Reset filters
               </Link>
             </div>

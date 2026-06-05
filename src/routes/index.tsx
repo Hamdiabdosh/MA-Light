@@ -12,6 +12,7 @@ import {
   roomsQuery,
   statsQuery,
 } from "@/lib/queries";
+import { defaultProductsSearch } from "@/lib/products-search";
 import { waLink } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/")({
@@ -71,6 +72,7 @@ function HomePage() {
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Link
               to="/products"
+              search={defaultProductsSearch}
               className="inline-flex items-center gap-2 rounded-lg bg-gold px-6 py-3.5 text-sm font-semibold text-background shadow-gold transition-transform hover:-translate-y-0.5"
             >
               <Zap className="h-4 w-4" /> View Products
@@ -138,7 +140,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <SectionHeader label="Digital Showroom" title="Featured Products" />
-            <Link to="/products" className="inline-flex items-center gap-1 text-sm text-accent hover:gap-2 transition-all">
+            <Link to="/products" search={defaultProductsSearch} className="inline-flex items-center gap-1 text-sm text-accent hover:gap-2 transition-all">
               View all <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

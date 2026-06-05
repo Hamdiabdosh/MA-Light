@@ -4,6 +4,7 @@ import { ChevronRight, MessageCircle, Phone, Check } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { ProductCard } from "@/components/site/ProductCard";
 import { productBySlugQuery, relatedProductsQuery } from "@/lib/queries";
+import { defaultProductsSearch } from "@/lib/products-search";
 import { STORE_PHONE, waProductLink } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/products/$slug")({
@@ -27,7 +28,7 @@ export const Route = createFileRoute("/products/$slug")({
       <div className="mx-auto max-w-2xl px-6 py-32 text-center">
         <div className="text-6xl">🔌</div>
         <h1 className="mt-6 font-display text-4xl">Product not found</h1>
-        <Link to="/products" className="mt-6 inline-block text-accent">← Back to all products</Link>
+        <Link to="/products" search={defaultProductsSearch} className="mt-6 inline-block text-accent">← Back to all products</Link>
       </div>
     </Layout>
   ),
@@ -44,7 +45,7 @@ function ProductDetail() {
         <nav className="flex items-center gap-2 text-xs text-muted-foreground">
           <Link to="/" className="hover:text-accent">Home</Link>
           <ChevronRight className="h-3 w-3" />
-          <Link to="/products" className="hover:text-accent">Products</Link>
+          <Link to="/products" search={defaultProductsSearch} className="hover:text-accent">Products</Link>
           <ChevronRight className="h-3 w-3" />
           <span className="text-foreground">{product.name}</span>
         </nav>

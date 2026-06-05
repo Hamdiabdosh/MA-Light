@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { defaultProductsSearch } from "@/lib/products-search";
 import { STORE_ADDRESS, STORE_EMAIL, STORE_PHONE } from "@/lib/whatsapp";
 
 export function Footer() {
@@ -15,7 +16,7 @@ export function Footer() {
         <div>
           <div className="section-label mb-3">Explore</div>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><Link to="/products" className="hover:text-accent">Products</Link></li>
+            <li><Link to="/products" search={defaultProductsSearch} className="hover:text-accent">Products</Link></li>
             <li><Link to="/showroom" className="hover:text-accent">Virtual Showroom</Link></li>
             <li><Link to="/gallery" className="hover:text-accent">Gallery</Link></li>
             <li><Link to="/about" className="hover:text-accent">About</Link></li>
