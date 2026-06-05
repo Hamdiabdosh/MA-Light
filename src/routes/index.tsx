@@ -18,11 +18,11 @@ import { waLink } from "@/lib/whatsapp";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Harar Electrical Solutions — Lighting & Electrical Products" },
+      { title: "MA-Light — Lighting & Electrical Products" },
       {
         name: "description",
         content:
-          "Harar's #1 electrical store. LED lighting, chandeliers, switches, cables and more. Serving Harar since 2008.",
+          "MA-Light — LED lighting, chandeliers, switches, cables and more. Serving Harar since 2008.",
       },
     ],
   }),
@@ -60,7 +60,7 @@ function HomePage() {
         <div className="relative mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] text-accent">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-            Harar's #1 Electrical Store
+            MA-Light Electrical Store
           </div>
           <h1 className="mt-8 font-display text-5xl leading-[1.1] md:text-7xl">
             Quality Electrical &amp; <em className="text-gold">Lighting Solutions</em> for Every Need
@@ -245,7 +245,7 @@ function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:items-center">
           <div>
             <div className="section-label mb-3">Our Story</div>
-            <h2 className="font-display text-4xl md:text-5xl">Harar's trusted electrical partner</h2>
+            <h2 className="font-display text-4xl md:text-5xl">MA-Light — your trusted electrical partner</h2>
             <p className="mt-5 text-muted-foreground">
               Since 2008 we've supplied homes, hotels, offices and contractors with genuine,
               high-quality electrical products — backed by expert guidance and after-sales support.

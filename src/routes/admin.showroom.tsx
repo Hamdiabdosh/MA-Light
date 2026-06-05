@@ -38,7 +38,7 @@ const emptyRoomForm = (): RoomFormState => ({
 });
 
 export const Route = createFileRoute("/admin/showroom")({
-  head: () => ({ meta: [{ title: "Showroom — Harar Electrical Admin" }] }),
+  head: () => ({ meta: [{ title: "Showroom — MA-Light Admin" }] }),
   loader: ({ context }) => context.queryClient.ensureQueryData(roomsQuery),
   component: AdminShowroomPage,
 });

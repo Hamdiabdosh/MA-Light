@@ -46,7 +46,7 @@ const emptyForm = (): GalleryFormState => ({
 });
 
 export const Route = createFileRoute("/admin/gallery")({
-  head: () => ({ meta: [{ title: "Gallery — Harar Electrical Admin" }] }),
+  head: () => ({ meta: [{ title: "Gallery — MA-Light Admin" }] }),
   loader: ({ context }) => context.queryClient.ensureQueryData(galleryQuery),
   component: AdminGalleryPage,
 });
@@ -169,7 +169,7 @@ function AdminGalleryPage() {
                 label="Photo"
                 images={form.image_url ? [form.image_url] : []}
                 onImagesChange={(urls) => setForm({ ...form, image_url: urls[0] ?? "" })}
-                folder="harar-electrical/gallery"
+                folder="ma-light/gallery"
                 multiple={false}
               />
               <div className="grid gap-4 sm:grid-cols-2">

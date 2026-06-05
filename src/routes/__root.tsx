@@ -77,13 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Harar Electrical Solutions — Lighting & Electrical Products" },
+      { title: "MA-Light — Lighting & Electrical Products" },
       {
         name: "description",
         content:
-          "Harar's #1 electrical store. Switches, cables, LED lighting, chandeliers and circuit breakers. Visit our showroom or order on WhatsApp.",
+          "MA-Light — switches, cables, LED lighting, chandeliers and circuit breakers. Visit our showroom or order on WhatsApp.",
       },
-      { property: "og:title", content: "Harar Electrical Solutions" },
+      { property: "og:title", content: "MA-Light" },
       {
         property: "og:description",
         content: "Quality electrical and lighting solutions for every need in Harar.",

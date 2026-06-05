@@ -7,7 +7,7 @@ import { galleryQuery } from "@/lib/queries";
 
 export const Route = createFileRoute("/gallery")({
   loader: ({ context }) => context.queryClient.ensureQueryData(galleryQuery),
-  head: () => ({ meta: [{ title: "Gallery — Harar Electrical Solutions" }] }),
+  head: () => ({ meta: [{ title: "Gallery — MA-Light" }] }),
   component: GalleryPage,
 });
 

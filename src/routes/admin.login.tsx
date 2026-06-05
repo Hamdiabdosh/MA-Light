@@ -4,7 +4,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/admin/login")({
-  head: () => ({ meta: [{ title: "Admin Login — Harar Electrical Solutions" }] }),
+  head: () => ({ meta: [{ title: "Admin Login — MA-Light" }] }),
   component: AdminLoginPage,
 });
 

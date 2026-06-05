@@ -344,7 +344,7 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
         images={images}
         onImagesChange={setImages}
         onUploadingChange={setUploading}
-        folder={`harar-electrical/products/${productId}`}
+        folder={`ma-light/products/${productId}`}
       />
 
       <div className="flex gap-3 pt-2">

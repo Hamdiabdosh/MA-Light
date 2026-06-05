@@ -28,7 +28,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
       <div className="flex min-h-screen">
         <aside className="w-72 shrink-0 border-r border-border bg-surface-1 p-5">
           <div className="mb-6">
-            <div className="font-display text-xl text-accent">Harar Electrical</div>
+            <div className="font-display text-xl text-accent">MA-Light</div>
             <div className="mt-1 text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Admin Panel</div>
           </div>
 
@@ -48,7 +48,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
         <div className="flex flex-1 flex-col bg-background">
           <header className="flex items-center justify-between border-b border-border px-6 py-4">
             <div>
-              <div className="font-display text-lg">Harar Electrical — Admin</div>
+              <div className="font-display text-lg">MA-Light — Admin</div>
               <div className="text-xs text-muted-foreground">Manage products, reviews, and showroom</div>
             </div>
 

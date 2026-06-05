@@ -20,7 +20,7 @@ import {
 type Filter = "all" | "pending" | "approved";
 
 export const Route = createFileRoute("/admin/reviews")({
-  head: () => ({ meta: [{ title: "Reviews — Harar Electrical Admin" }] }),
+  head: () => ({ meta: [{ title: "Reviews — MA-Light Admin" }] }),
   component: AdminReviewsPage,
 });
 

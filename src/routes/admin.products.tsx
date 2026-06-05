@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/table";
 
 export const Route = createFileRoute("/admin/products")({
-  head: () => ({ meta: [{ title: "Products — Harar Electrical Admin" }] }),
+  head: () => ({ meta: [{ title: "Products — MA-Light Admin" }] }),
   loader: ({ context }) => context.queryClient.ensureQueryData(categoriesQuery),
   component: AdminProductsPage,
 });

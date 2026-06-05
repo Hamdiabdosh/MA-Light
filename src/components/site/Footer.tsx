@@ -7,9 +7,9 @@ export function Footer() {
     <footer className="border-t border-border bg-surface-1">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
-          <div className="font-display text-xl">Harar Electrical Solutions</div>
+          <div className="font-display text-xl">MA-Light</div>
           <p className="mt-3 max-w-md text-sm text-muted-foreground">
-            Harar's trusted source for premium electrical products and lighting since 2008.
+            Premium electrical products and lighting since 2008. Serving Harar and the surrounding region.
             Authorized dealer, expert advice, fair prices.
           </p>
         </div>
@@ -32,7 +32,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Harar Electrical Solutions. All rights reserved.
+        © {new Date().getFullYear()} MA-Light. All rights reserved.
       </div>
     </footer>
   );

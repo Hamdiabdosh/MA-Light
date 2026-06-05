@@ -10,7 +10,7 @@ import { waProductLink } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/showroom")({
   loader: ({ context }) => context.queryClient.ensureQueryData(roomsQuery),
-  head: () => ({ meta: [{ title: "Virtual Showroom — Harar Electrical Solutions" }] }),
+  head: () => ({ meta: [{ title: "Virtual Showroom — MA-Light" }] }),
   component: ShowroomPage,
 });
 

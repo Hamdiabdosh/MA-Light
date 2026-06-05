@@ -50,7 +50,7 @@ const emptyForm = (): CategoryFormState => ({
 });
 
 export const Route = createFileRoute("/admin/categories")({
-  head: () => ({ meta: [{ title: "Categories — Harar Electrical Admin" }] }),
+  head: () => ({ meta: [{ title: "Categories — MA-Light Admin" }] }),
   loader: ({ context }) => context.queryClient.ensureQueryData(categoriesQuery),
   component: AdminCategoriesPage,
 });

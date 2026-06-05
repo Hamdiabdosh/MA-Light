@@ -11,7 +11,7 @@ type AdminAuthState = {
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
-  head: () => ({ meta: [{ title: "Admin — Harar Electrical Solutions" }] }),
+  head: () => ({ meta: [{ title: "Admin — MA-Light" }] }),
   component: AdminRoute,
 });
 

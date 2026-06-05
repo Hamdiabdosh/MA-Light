@@ -23,7 +23,7 @@ export function Nav() {
             <Zap className="h-4 w-4" strokeWidth={2.5} />
           </div>
           <div className="leading-tight">
-            <div className="font-display text-base">Harar Electrical</div>
+            <div className="font-display text-base">MA-Light</div>
             <div className="text-[10px] tracking-[0.25em] text-muted-foreground uppercase">
               Solutions
             </div>

@@ -11,7 +11,7 @@ export const Route = createFileRoute("/categories/$slug")({
     return cat;
   },
   head: ({ loaderData }) => ({
-    meta: [{ title: `${loaderData?.name ?? "Category"} — Harar Electrical Solutions` }],
+    meta: [{ title: `${loaderData?.name ?? "Category"} — MA-Light` }],
   }),
   component: CategoryPage,
   notFoundComponent: () => (

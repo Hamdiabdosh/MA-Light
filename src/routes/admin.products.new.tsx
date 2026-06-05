@@ -3,7 +3,7 @@ import { ProductForm } from "@/components/admin/ProductForm";
 import { categoriesQuery } from "@/lib/queries";
 
 export const Route = createFileRoute("/admin/products/new")({
-  head: () => ({ meta: [{ title: "Add Product — Harar Electrical Admin" }] }),
+  head: () => ({ meta: [{ title: "Add Product — MA-Light Admin" }] }),
   loader: ({ context }) => context.queryClient.ensureQueryData(categoriesQuery),
   component: AdminNewProductPage,
 });

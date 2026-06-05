@@ -13,7 +13,7 @@ export const Route = createFileRoute("/products")({
     q: (search.q as string) ?? "",
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(categoriesQuery),
-  head: () => ({ meta: [{ title: "All Products — Harar Electrical Solutions" }] }),
+  head: () => ({ meta: [{ title: "All Products — MA-Light" }] }),
   component: ProductsPage,
 });
 

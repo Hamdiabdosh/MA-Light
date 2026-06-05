@@ -4,7 +4,7 @@ import { Image, Package, Plus, Star, Tags } from "lucide-react";
 import { pendingReviewsCountQuery, statsQuery } from "@/lib/queries";
 
 export const Route = createFileRoute("/admin/")({
-  head: () => ({ meta: [{ title: "Dashboard — Harar Electrical Admin" }] }),
+  head: () => ({ meta: [{ title: "Dashboard — MA-Light Admin" }] }),
   loader: ({ context }) => context.queryClient.ensureQueryData(statsQuery),
   component: AdminDashboard,
 });

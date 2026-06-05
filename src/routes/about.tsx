@@ -6,11 +6,11 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Harar Electrical Solutions" },
+      { title: "About — MA-Light" },
       {
         name: "description",
         content:
-          "Founded in 2008, Harar Electrical Solutions is the region's most trusted supplier of quality electrical products.",
+          "Founded in 2008, MA-Light is the region's most trusted supplier of quality electrical products.",
       },
     ],
   }),
@@ -24,7 +24,7 @@ function AboutPage() {
         <div className="mx-auto max-w-3xl text-center">
           <SectionHeader
             label="Our Story"
-            title="Harar's trusted electrical partner since 2008"
+            title="MA-Light — trusted electrical partner since 2008"
             sub="From a small accessories shop to the region's most trusted supplier of quality electrical products."
             align="center"
           />

@@ -7,7 +7,7 @@ import { categoriesQuery } from "@/lib/queries";
 
 export const Route = createFileRoute("/categories/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(categoriesQuery),
-  head: () => ({ meta: [{ title: "Categories — Harar Electrical Solutions" }] }),
+  head: () => ({ meta: [{ title: "Categories — MA-Light" }] }),
   component: CategoriesPage,
 });
 

@@ -10,7 +10,7 @@ import { STORE_ADDRESS, STORE_EMAIL, STORE_PHONE, waLink } from "@/lib/whatsapp"
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({ meta: [{ title: "Contact — Harar Electrical Solutions" }] }),
+  head: () => ({ meta: [{ title: "Contact — MA-Light" }] }),
   component: ContactPage,
 });
 

@@ -4,7 +4,7 @@ import { ProductForm } from "@/components/admin/ProductForm";
 import { categoriesQuery, productByIdQuery } from "@/lib/queries";
 
 export const Route = createFileRoute("/admin/products/$id/edit")({
-  head: () => ({ meta: [{ title: "Edit Product — Harar Electrical Admin" }] }),
+  head: () => ({ meta: [{ title: "Edit Product — MA-Light Admin" }] }),
   loader: async ({ context, params }) => {
     await Promise.all([
       context.queryClient.ensureQueryData(categoriesQuery),
