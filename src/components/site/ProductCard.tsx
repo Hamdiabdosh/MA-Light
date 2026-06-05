@@ -83,6 +83,26 @@ export function ProductCard({ product }: { product: Product }) {
             {product.badge}
           </span>
         )}
+        <div className="quick-peek-panel absolute inset-x-2 bottom-2 z-10 rounded-xl border border-gold/25 bg-background/70 p-2 backdrop-blur-md transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+          <div className="flex gap-2">
+            <Link
+              to="/products/$slug"
+              params={{ slug: product.slug }}
+              search={defaultProductsSearch}
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-2 px-3 py-2 text-[11px] font-semibold transition-colors hover:border-gold hover:text-accent"
+            >
+              Details <ArrowRight className="h-3 w-3" />
+            </Link>
+            <a
+              href={waProductLink(product.name)}
+              target="_blank"
+              rel="noreferrer"
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-whatsapp px-3 py-2 text-[11px] font-semibold text-white transition-opacity hover:opacity-90"
+            >
+              <MessageCircle className="h-3 w-3" /> WhatsApp
+            </a>
+          </div>
+        </div>
       </div>
       <div className="flex flex-1 flex-col p-5">
         <h3 className="text-base font-semibold text-foreground">{product.name}</h3>
@@ -94,7 +114,7 @@ export function ProductCard({ product }: { product: Product }) {
             {Number(product.price).toLocaleString()} ETB
           </div>
         )}
-        <div className="mt-auto flex gap-2 pt-4">
+        <div className="quick-peek-mobile-actions mt-auto flex gap-2 pt-4">
           <Link
             to="/products/$slug"
             params={{ slug: product.slug }}

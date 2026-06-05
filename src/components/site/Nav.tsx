@@ -1,13 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Zap, MessageCircle, Menu, X } from "lucide-react";
+import { Zap, MessageCircle, Menu, X, Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { defaultProductsSearch } from "@/lib/products-search";
 import { waLink } from "@/lib/whatsapp";
 import { useRouterState } from "@tanstack/react-router";
 
 const links = [
-  { to: "/products" as const, label: "Products", search: defaultProductsSearch },
+  {
+    to: "/products" as const,
+    label: "Products",
+    search: defaultProductsSearch,
+  },
   { to: "/categories" as const, label: "Categories" },
   { to: "/showroom" as const, label: "Showroom" },
   { to: "/gallery" as const, label: "Gallery" },
@@ -19,10 +23,13 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const activeLink =
-    links.find((link) => pathname === link.to || pathname.startsWith(`${link.to}/`))?.to ?? null;
+    links.find(
+      (link) => pathname === link.to || pathname.startsWith(`${link.to}/`),
+    )?.to ?? null;
   const highlightedLink = hoveredLink ?? activeLink;
 
   useEffect(() => {
@@ -31,6 +38,21 @@ export function Nav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains("dark");
+    setTheme(isDark ? "dark" : "light");
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme((current) => {
+      const next = current === "dark" ? "light" : "dark";
+      const isDark = next === "dark";
+      document.documentElement.classList.toggle("dark", isDark);
+      localStorage.setItem("theme", next);
+      return next;
+    });
+  };
 
   return (
     <nav
@@ -81,6 +103,21 @@ export function Nav() {
           ))}
         </ul>
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="grid h-10 w-10 place-items-center rounded-lg border border-border bg-background/70 transition-colors hover:bg-accent/15"
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+            title={
+              theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            }
+          >
+            {theme === "dark" ? (
+              <Sun className="h-4 w-4" />
+            ) : (
+              <Moon className="h-4 w-4" />
+            )}
+          </button>
           <a
             href={waLink("Hello! I need help with electrical products.")}
             target="_blank"
@@ -98,7 +135,9 @@ export function Nav() {
           </button>
         </div>
       </div>
-      <div className={`nav-shimmer pointer-events-none absolute inset-x-0 bottom-0 h-px ${scrolled ? "opacity-100" : "opacity-0"}`} />
+      <div
+        className={`nav-shimmer pointer-events-none absolute inset-x-0 bottom-0 h-px ${scrolled ? "opacity-100" : "opacity-0"}`}
+      />
       {open && (
         <div className="border-t border-border bg-background md:hidden">
           <ul className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">

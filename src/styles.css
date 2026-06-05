@@ -45,7 +45,49 @@
 :root {
   --radius: 0.625rem;
 
-  /* Dark luxury palette */
+  /* Light palette */
+  --background: oklch(0.985 0.003 85);
+  --foreground: oklch(0.2 0.01 80);
+  --surface-1: oklch(0.96 0.004 82);
+  --surface-2: oklch(0.93 0.006 82);
+  --surface-3: oklch(0.89 0.008 82);
+
+  --card: var(--surface-2);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+
+  --gold: oklch(0.67 0.12 80);
+  --gold-light: oklch(0.79 0.1 85);
+  --gold-dark: oklch(0.52 0.1 75);
+
+  --primary: var(--gold);
+  --primary-foreground: oklch(0.15 0.005 80);
+
+  --secondary: var(--surface-3);
+  --secondary-foreground: var(--foreground);
+
+  --muted: var(--surface-2);
+  --muted-foreground: oklch(0.45 0.02 80);
+
+  --accent: var(--gold-dark);
+  --accent-foreground: oklch(0.98 0 0);
+
+  --destructive: oklch(0.58 0.2 27);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.7 0.03 82 / 0.35);
+  --input: oklch(0.7 0.03 82 / 0.45);
+  --ring: var(--gold);
+
+  --whatsapp: oklch(0.69 0.18 145);
+
+  --gradient-gold: linear-gradient(135deg, oklch(0.67 0.12 80), oklch(0.79 0.1 85));
+  --gradient-hero: radial-gradient(ellipse at top, oklch(0.67 0.12 80 / 0.12), transparent 60%);
+  --shadow-gold: 0 18px 40px -18px oklch(0.67 0.12 80 / 0.28);
+}
+
+.dark {
   --background: oklch(0.13 0.005 80);
   --foreground: oklch(0.94 0.018 80);
   --surface-1: oklch(0.16 0.006 80);
@@ -80,18 +122,16 @@
   --input: oklch(0.72 0.13 80 / 0.25);
   --ring: var(--gold);
 
-  --whatsapp: oklch(0.69 0.18 145);
-
   --gradient-gold: linear-gradient(135deg, oklch(0.72 0.13 80), oklch(0.88 0.1 85));
   --gradient-hero: radial-gradient(ellipse at top, oklch(0.72 0.13 80 / 0.18), transparent 60%);
   --shadow-gold: 0 18px 40px -18px oklch(0.72 0.13 80 / 0.45);
+  color-scheme: dark;
 }
-
-.dark { color-scheme: dark; }
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { color-scheme: dark; }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -163,11 +203,33 @@
     break-inside: avoid;
     margin-bottom: 1rem;
   }
+
+  .quick-peek-panel {
+    opacity: 0;
+    transform: translateY(18px);
+    pointer-events: none;
+  }
 }
 
 @media (min-width: 640px) {
   .gallery-masonry {
     column-count: 2;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .quick-peek-panel {
+    pointer-events: auto;
+  }
+
+  .quick-peek-mobile-actions {
+    display: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .quick-peek-panel {
+    display: none;
   }
 }
 
