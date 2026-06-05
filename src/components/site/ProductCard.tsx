@@ -1,16 +1,80 @@
 import { Link } from "@tanstack/react-router";
 import { MessageCircle, ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import type { Product } from "@/lib/queries";
 import { defaultProductsSearch } from "@/lib/products-search";
 import { waProductLink } from "@/lib/whatsapp";
 
 export function ProductCard({ product }: { product: Product }) {
-  const hasImg = product.images && product.images.length > 0;
+  const hasImg = Boolean(product.images && product.images.length > 0);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [tiltEnabled, setTiltEnabled] = useState(false);
+  const cardRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const query = window.matchMedia(
+      "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+    );
+    setTiltEnabled(query.matches);
+  }, []);
+
+  const onPointerMove = (e: PointerEvent<HTMLDivElement>) => {
+    if (!tiltEnabled || e.pointerType !== "mouse") return;
+    const card = cardRef.current;
+    if (!card) return;
+
+    const rect = card.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    const rotateY = (px - 0.5) * 16;
+    const rotateX = (0.5 - py) * 16;
+
+    card.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    card.style.setProperty("--spot-x", `${px * 100}%`);
+    card.style.setProperty("--spot-y", `${py * 100}%`);
+  };
+
+  const onPointerLeave = () => {
+    const card = cardRef.current;
+    if (!card) return;
+    card.style.transform = "";
+    card.style.setProperty("--spot-x", "50%");
+    card.style.setProperty("--spot-y", "50%");
+  };
+
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-2 transition-all hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-gold">
+    <div
+      ref={cardRef}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
+      style={{ "--spot-x": "50%", "--spot-y": "50%" } as CSSProperties}
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-2 transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-gold"
+    >
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(280px circle at var(--spot-x) var(--spot-y), oklch(0.88 0.1 85 / 0.12), transparent 62%)",
+        }}
+        aria-hidden="true"
+      />
       <div className="relative flex h-44 items-center justify-center overflow-hidden bg-surface-3 text-6xl">
         {hasImg ? (
-          <img src={product.images![0]} alt={product.name} className="h-full w-full object-cover" />
+          <>
+            {!imageLoaded && (
+              <div className="absolute inset-0 shimmer bg-surface-2" aria-hidden="true" />
+            )}
+            <img
+              src={product.images![0]}
+              alt={product.name}
+              loading="lazy"
+              className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+                imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              onLoad={() => setImageLoaded(true)}
+              onError={() => setImageLoaded(true)}
+            />
+          </>
         ) : (
           <span>{product.icon ?? "💡"}</span>
         )}

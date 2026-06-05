@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useMatchRoute } from "@tanstack/react-router";
 import { useSuspenseQuery, useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
-function ProductsPage() {
+function ProductsCatalogPage() {
   const { category, q } = Route.useSearch();
   const navigate = Route.useNavigate();
   const cats = useSuspenseQuery(categoriesQuery).data;
@@ -96,4 +96,15 @@ function ProductsPage() {
       </section>
     </Layout>
   );
+}
+
+function ProductsPage() {
+  const matchRoute = useMatchRoute();
+  const isProductDetailRoute = Boolean(matchRoute({ to: "/products/$slug" }));
+
+  if (isProductDetailRoute) {
+    return <Outlet />;
+  }
+
+  return <ProductsCatalogPage />;
 }

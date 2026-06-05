@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 import { Layout } from "@/components/site/Layout";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { galleryQuery } from "@/lib/queries";
@@ -18,7 +20,12 @@ function GalleryPage() {
     [items],
   );
   const [filter, setFilter] = useState<string>("");
+  const [lightboxIndex, setLightboxIndex] = useState(-1);
   const filtered = filter ? items.filter((i) => i.project_type === filter) : items;
+  const lightboxSlides = useMemo(
+    () => filtered.filter((g) => Boolean(g.image_url)).map((g) => ({ src: g.image_url!, key: g.id })),
+    [filtered],
+  );
 
   return (
     <Layout>
@@ -56,32 +63,50 @@ function GalleryPage() {
               </button>
             ))}
           </div>
-          <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          <div className="gallery-masonry mt-8">
             {filtered.map((g) => (
-              <div
-                key={g.id}
-                className="group relative aspect-square overflow-hidden rounded-2xl border border-border bg-surface-2"
-              >
-                {g.image_url ? (
-                  <img src={g.image_url} alt={g.title} className="h-full w-full object-cover" />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center text-6xl">
-                    {g.icon ?? "🏠"}
-                  </div>
-                )}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-4">
-                  <div className="text-sm font-semibold">{g.title}</div>
-                  {g.project_type && (
-                    <div className="text-[10px] uppercase tracking-widest text-accent">
-                      {g.project_type}
+              <div key={g.id} className="gallery-masonry-item">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!g.image_url) return;
+                    const nextIndex = lightboxSlides.findIndex((slide) => slide.key === g.id);
+                    if (nextIndex >= 0) setLightboxIndex(nextIndex);
+                  }}
+                  className="group relative block w-full overflow-hidden rounded-2xl border border-border bg-surface-2 text-left"
+                >
+                  {g.image_url ? (
+                    <img
+                      src={g.image_url}
+                      alt={g.title}
+                      loading="lazy"
+                      className="block w-full transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <div className="flex h-56 w-full items-center justify-center bg-surface-3 text-6xl">
+                      {g.icon ?? "🏠"}
                     </div>
                   )}
-                </div>
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-4">
+                    <div className="text-sm font-semibold">{g.title}</div>
+                    {g.project_type && (
+                      <div className="text-[10px] uppercase tracking-widest text-accent">
+                        {g.project_type}
+                      </div>
+                    )}
+                  </div>
+                </button>
               </div>
             ))}
           </div>
         </div>
       </section>
+      <Lightbox
+        open={lightboxIndex >= 0}
+        close={() => setLightboxIndex(-1)}
+        index={lightboxIndex}
+        slides={lightboxSlides}
+      />
     </Layout>
   );
 }
