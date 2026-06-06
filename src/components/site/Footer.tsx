@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { defaultProductsSearch } from "@/lib/products-search";
-import { STORE_ADDRESS, STORE_EMAIL, STORE_PHONE } from "@/lib/whatsapp";
+import { STORE_ADDRESS, STORE_EMAIL, STORE_MAP_URL, STORE_PHONES } from "@/lib/whatsapp";
 
 export function Footer() {
   return (
@@ -25,9 +25,20 @@ export function Footer() {
         <div>
           <div className="section-label mb-3">Contact</div>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>{STORE_PHONE}</li>
+            {STORE_PHONES.map((phone) => (
+              <li key={phone}>{phone}</li>
+            ))}
             <li>{STORE_EMAIL}</li>
-            <li>{STORE_ADDRESS}</li>
+            <li>
+              <a
+                href={STORE_MAP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-accent"
+              >
+                {STORE_ADDRESS}
+              </a>
+            </li>
           </ul>
         </div>
       </div>

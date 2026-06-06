@@ -154,7 +154,7 @@ function AdminCategoriesPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="section-label mb-2">Catalog</div>
-          <h1 className="font-display text-4xl">Categories</h1>
+          <h1 className="font-display text-3xl md:text-4xl">Categories</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Organize products into browsable categories ({categories.length} total)
           </p>
@@ -162,7 +162,10 @@ function AdminCategoriesPage() {
 
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button onClick={openCreate} className="bg-gold text-background shadow-gold hover:bg-gold/90">
+            <Button
+              onClick={openCreate}
+              className="self-start bg-gold text-background shadow-gold hover:bg-gold/90"
+            >
               <Plus className="mr-2 h-4 w-4" />
               Add Category
             </Button>
@@ -246,25 +249,28 @@ function AdminCategoriesPage() {
           <Table>
             <TableHeader>
               <TableRow className="border-border hover:bg-transparent">
-                <TableHead>Icon</TableHead>
+                <TableHead className="hidden md:table-cell">Icon</TableHead>
                 <TableHead>Name</TableHead>
-                <TableHead>Slug</TableHead>
-                <TableHead>Order</TableHead>
+                <TableHead className="hidden md:table-cell">Slug</TableHead>
+                <TableHead className="hidden md:table-cell">Order</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {sorted.map((c) => (
                 <TableRow key={c.id} className="border-border">
-                  <TableCell className="text-xl">{c.icon ?? "—"}</TableCell>
-                  <TableCell className="font-medium">{c.name}</TableCell>
-                  <TableCell className="text-muted-foreground">{c.slug}</TableCell>
-                  <TableCell>{c.display_order ?? 0}</TableCell>
+                  <TableCell className="hidden text-xl md:table-cell">{c.icon ?? "—"}</TableCell>
+                  <TableCell className="font-medium">
+                    {c.icon && <span className="mr-2 md:hidden">{c.icon}</span>}
+                    {c.name}
+                  </TableCell>
+                  <TableCell className="hidden text-muted-foreground md:table-cell">{c.slug}</TableCell>
+                  <TableCell className="hidden md:table-cell">{c.display_order ?? 0}</TableCell>
                   <TableCell className="text-right">
-                    <div className="flex justify-end gap-2">
+                    <div className="flex flex-wrap justify-end gap-2">
                       <Button variant="outline" size="sm" onClick={() => openEdit(c)}>
-                        <Pencil className="mr-1 h-3.5 w-3.5" />
-                        Edit
+                        <Pencil className="h-3.5 w-3.5 md:mr-1" />
+                        <span className="hidden md:inline">Edit</span>
                       </Button>
                       <Button
                         variant="outline"
@@ -273,8 +279,8 @@ function AdminCategoriesPage() {
                         onClick={() => handleDelete(c.id, c.name)}
                         disabled={remove.isPending}
                       >
-                        <Trash2 className="mr-1 h-3.5 w-3.5" />
-                        Delete
+                        <Trash2 className="h-3.5 w-3.5 md:mr-1" />
+                        <span className="hidden md:inline">Delete</span>
                       </Button>
                     </div>
                   </TableCell>

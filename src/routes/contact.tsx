@@ -6,7 +6,7 @@ import { z } from "zod";
 import { Layout } from "@/components/site/Layout";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { supabase } from "@/integrations/supabase/client";
-import { STORE_ADDRESS, STORE_EMAIL, STORE_PHONE, waLink } from "@/lib/whatsapp";
+import { STORE_ADDRESS, STORE_EMAIL, STORE_MAP_URL, STORE_PHONES, waLink } from "@/lib/whatsapp";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/contact")({
@@ -55,7 +55,12 @@ function ContactPage() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2">
           <div className="space-y-4">
             {[
-              { i: Phone, label: "Call us", value: STORE_PHONE, href: `tel:${STORE_PHONE}` },
+              ...STORE_PHONES.map((phone) => ({
+                i: Phone,
+                label: "Call us",
+                value: phone,
+                href: `tel:${phone.replace(/\s/g, "")}`,
+              })),
               {
                 i: MessageCircle,
                 label: "WhatsApp",
@@ -79,7 +84,7 @@ function ContactPage() {
               );
               return href ? (
                 <a
-                  key={label}
+                  key={`${label}-${value}`}
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel="noreferrer"
@@ -88,18 +93,24 @@ function ContactPage() {
                   {body}
                 </a>
               ) : (
-                <div key={label} className="flex items-center gap-4 rounded-xl border border-border bg-surface-2 p-5">
+                <div key={`${label}-${value}`} className="flex items-center gap-4 rounded-xl border border-border bg-surface-2 p-5">
                   {body}
                 </div>
               );
             })}
 
-            <iframe
-              title="Store location"
-              className="h-64 w-full rounded-xl border border-border"
-              src="https://www.google.com/maps?q=Harar,Ethiopia&output=embed"
-              loading="lazy"
-            />
+            <a
+              href={STORE_MAP_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="flex h-64 w-full flex-col items-center justify-center gap-3 rounded-xl border border-border bg-surface-2 p-6 text-center transition-colors hover:border-gold/40"
+            >
+              <MapPin className="h-8 w-8 text-accent" />
+              <div>
+                <div className="text-sm font-semibold">View store on Google Maps</div>
+                <div className="mt-1 text-xs text-muted-foreground">{STORE_ADDRESS}</div>
+              </div>
+            </a>
           </div>
 
           {/* Review form */}

@@ -147,10 +147,10 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
   return (
     <form
       onSubmit={form.handleSubmit((values) => save.mutate(values))}
-      className="mx-auto max-w-3xl space-y-8 rounded-2xl border border-border bg-surface-2 p-8"
+      className="mx-auto max-w-3xl space-y-8 rounded-2xl border border-border bg-surface-2 p-4 md:p-8"
     >
       <div>
-        <h1 className="font-display text-3xl">{isEdit ? "Edit Product" : "Add Product"}</h1>
+        <h1 className="font-display text-2xl md:text-3xl">{isEdit ? "Edit Product" : "Add Product"}</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           {isEdit ? "Update product details and images." : "Create a new product listing."}
         </p>
@@ -297,7 +297,7 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
       <div className="space-y-3">
         <Label>Specifications</Label>
         {specRows.map((row, i) => (
-          <div key={i} className="flex gap-2">
+          <div key={i} className="flex flex-col gap-2 sm:flex-row">
             <Input
               placeholder="Key"
               value={row.key}
@@ -347,7 +347,7 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
         folder={`ma-light/products/${productId}`}
       />
 
-      <div className="flex gap-3 pt-2">
+      <div className="flex flex-wrap gap-3 pt-2">
         <Button
           type="submit"
           disabled={save.isPending || uploading}

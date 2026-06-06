@@ -127,7 +127,7 @@ function AdminGalleryPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="section-label mb-2">Portfolio</div>
-          <h1 className="font-display text-4xl">Gallery</h1>
+          <h1 className="font-display text-3xl md:text-4xl">Gallery</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Manage installation photos and project highlights.
           </p>

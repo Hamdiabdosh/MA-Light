@@ -164,13 +164,13 @@ function AdminShowroomPage() {
     <div className="space-y-6">
       <div>
         <div className="section-label mb-2">Virtual Showroom</div>
-        <h1 className="font-display text-4xl">Showroom Rooms</h1>
+        <h1 className="font-display text-3xl md:text-4xl">Showroom Rooms</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Manage showroom rooms and assign products to each space.
         </p>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-xl">Rooms</h2>

@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useMatchRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Pencil, Plus, Trash2 } from "lucide-react";
@@ -23,6 +23,20 @@ export const Route = createFileRoute("/admin/products")({
 });
 
 function AdminProductsPage() {
+  const matchRoute = useMatchRoute();
+  const isChildRoute = Boolean(
+    matchRoute({ to: "/admin/products/new" }) ||
+      matchRoute({ to: "/admin/products/$id/edit" }),
+  );
+
+  if (isChildRoute) {
+    return <Outlet />;
+  }
+
+  return <AdminProductsListPage />;
+}
+
+function AdminProductsListPage() {
   const qc = useQueryClient();
   const [search, setSearch] = useState("");
 
@@ -63,7 +77,7 @@ function AdminProductsPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="section-label mb-2">Catalog</div>
-          <h1 className="font-display text-4xl">Products</h1>
+          <h1 className="font-display text-3xl md:text-4xl">Products</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Manage your product listings ({products.length} total)
           </p>
@@ -81,7 +95,7 @@ function AdminProductsPage() {
         placeholder="Search by name…"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="max-w-sm border-border bg-surface-2"
+        className="w-full border-border bg-surface-2 sm:max-w-sm"
       />
 
       <div className="rounded-2xl border border-border bg-surface-2">
@@ -96,10 +110,10 @@ function AdminProductsPage() {
             <TableHeader>
               <TableRow className="border-border hover:bg-transparent">
                 <TableHead>Name</TableHead>
-                <TableHead>Category</TableHead>
+                <TableHead className="hidden md:table-cell">Category</TableHead>
                 <TableHead>Price</TableHead>
-                <TableHead>Featured</TableHead>
-                <TableHead>Badge</TableHead>
+                <TableHead className="hidden lg:table-cell">Featured</TableHead>
+                <TableHead className="hidden lg:table-cell">Badge</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -110,20 +124,22 @@ function AdminProductsPage() {
                     {p.icon && <span className="mr-2">{p.icon}</span>}
                     {p.name}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell className="hidden text-muted-foreground md:table-cell">
                     {p.category_id ? (categoryMap.get(p.category_id) ?? "—") : "—"}
                   </TableCell>
                   <TableCell>
                     {p.show_price && p.price != null ? `${p.price.toLocaleString()} ETB` : "—"}
                   </TableCell>
-                  <TableCell>{p.is_featured ? "✓" : "—"}</TableCell>
-                  <TableCell className="text-muted-foreground">{p.badge ?? "—"}</TableCell>
+                  <TableCell className="hidden lg:table-cell">{p.is_featured ? "✓" : "—"}</TableCell>
+                  <TableCell className="hidden text-muted-foreground lg:table-cell">
+                    {p.badge ?? "—"}
+                  </TableCell>
                   <TableCell className="text-right">
-                    <div className="flex justify-end gap-2">
+                    <div className="flex flex-wrap justify-end gap-2">
                       <Button variant="outline" size="sm" asChild>
                         <Link to="/admin/products/$id/edit" params={{ id: p.id }}>
-                          <Pencil className="mr-1 h-3.5 w-3.5" />
-                          Edit
+                          <Pencil className="h-3.5 w-3.5 md:mr-1" />
+                          <span className="hidden md:inline">Edit</span>
                         </Link>
                       </Button>
                       <Button
@@ -133,8 +149,8 @@ function AdminProductsPage() {
                         onClick={() => handleDelete(p.id, p.name)}
                         disabled={remove.isPending}
                       >
-                        <Trash2 className="mr-1 h-3.5 w-3.5" />
-                        Delete
+                        <Trash2 className="h-3.5 w-3.5 md:mr-1" />
+                        <span className="hidden md:inline">Delete</span>
                       </Button>
                     </div>
                   </TableCell>

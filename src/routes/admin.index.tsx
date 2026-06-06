@@ -35,7 +35,7 @@ function AdminDashboard() {
     <div className="space-y-10">
       <div>
         <div className="section-label mb-2">Overview</div>
-        <h1 className="font-display text-4xl">Dashboard</h1>
+        <h1 className="font-display text-3xl md:text-4xl">Dashboard</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Store metrics and quick actions at a glance.
         </p>
@@ -64,7 +64,7 @@ function AdminDashboard() {
               </div>
             </div>
             <div
-              className={`mt-4 font-display text-4xl ${highlight ? "text-accent" : "text-foreground"}`}
+              className={`mt-4 font-display text-3xl md:text-4xl ${highlight ? "text-accent" : "text-foreground"}`}
             >
               {value}
             </div>
